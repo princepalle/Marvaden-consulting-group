@@ -33,32 +33,66 @@ const MCG = {
   menu.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
   addEventListener("keydown", e => { if (e.key === "Escape" && !menu.hidden) { setMenu(false); burger.focus(); } });
 
-  /* Hero showcase: auto-advancing title cards with pause control */
-  const slides = $$(".slide"), dots = $(".dots"), pauseBtn = $("[data-pause]");
-  let current = 0, timer = null, paused = reduceMotion;
-  slides.forEach((_, i) => {
+  /* Hero showcase. Each scene: white wipe down, then the panel slides in from a corner, headline lines
+     sharpen one by one, artwork slides in from the opposite side and zooms, and the label types itself. */
+  const stage = $("[data-stage]"), scenes = $$(".scene", stage), wipe = $(".wipe", stage);
+  const dots = $(".dots"), pauseBtn = $("[data-pause]");
+  const SCENE_MS = 5600, WIPE_MS = 450;
+  let current = -1, timer = null, typer = null, paused = reduceMotion;
+
+  scenes.forEach((_, i) => {
     const b = document.createElement("button");
-    b.type = "button"; b.setAttribute("aria-label", `Show slide ${i + 1} of ${slides.length}`);
-    b.addEventListener("click", () => { show(i); restart(); });
+    b.type = "button"; b.setAttribute("aria-label", `Show slide ${i + 1} of ${scenes.length}`);
+    b.addEventListener("click", () => { go(i); schedule(); });
     dots.append(b);
   });
-  const show = i => {
-    slides[current].classList.remove("on"); slides[current].setAttribute("aria-hidden", "true");
-    dots.children[current].removeAttribute("aria-current");
-    current = (i + slides.length) % slides.length;
-    slides[current].classList.add("on"); slides[current].setAttribute("aria-hidden", "false");
-    dots.children[current].setAttribute("aria-current", "true");
+
+  const typeLabel = scene => {
+    clearInterval(typer);
+    const el = $(".typed", scene); if (!el) return;
+    const text = el.dataset.text, label = el.parentElement;
+    if (reduceMotion) { el.textContent = text; return; }
+    el.textContent = ""; let n = 0;
+    setTimeout(() => {
+      if (!scene.classList.contains("on")) return;
+      label.classList.add("typing");
+      typer = setInterval(() => {
+        el.textContent = text.slice(0, ++n);
+        if (n >= text.length) { clearInterval(typer); setTimeout(() => label.classList.remove("typing"), 900); }
+      }, 55);
+    }, scene.classList.contains("sc-logo") ? 1100 : 1300);
   };
-  const restart = () => { clearInterval(timer); if (!paused) timer = setInterval(() => show(current + 1), 4500); };
+
+  const show = i => {
+    scenes.forEach(s => s.classList.remove("on", "play"));
+    current = (i + scenes.length) % scenes.length;
+    const scene = scenes[current];
+    scenes.forEach((s, k) => s.setAttribute("aria-hidden", String(k !== current)));
+    [...dots.children].forEach((d, k) => { if (k === current) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+    scene.classList.add("on");
+    void scene.offsetWidth;            // restart transitions from the "before" state
+    scene.classList.add("play");
+    typeLabel(scene);
+  };
+
+  const go = i => {
+    if (reduceMotion || current === -1) { show(i); return; }
+    wipe.classList.add("down");         // white sheet sweeps down over the current scene
+    setTimeout(() => { show(i); wipe.classList.remove("down"); }, WIPE_MS);
+  };
+
+  const schedule = () => { clearTimeout(timer); if (!paused) timer = setTimeout(() => { go(current + 1); schedule(); }, SCENE_MS); };
   const setPaused = p => {
-    paused = p; pauseBtn.setAttribute("aria-pressed", String(p));
-    pauseBtn.setAttribute("aria-label", p ? "Play slideshow" : "Pause slideshow"); restart();
+    paused = p; stage.classList.toggle("paused", p);
+    pauseBtn.setAttribute("aria-pressed", String(p));
+    pauseBtn.setAttribute("aria-label", p ? "Play slideshow" : "Pause slideshow");
+    schedule();
   };
   pauseBtn.addEventListener("click", () => setPaused(!paused));
-  slides.forEach((s, i) => s.setAttribute("aria-hidden", String(i !== 0)));
   show(0); setPaused(paused);
-  $(".showcase").addEventListener("focusin", () => clearInterval(timer));
-  $(".showcase").addEventListener("focusout", restart);
+  $(".showcase").addEventListener("focusin", () => clearTimeout(timer));
+  $(".showcase").addEventListener("focusout", schedule);
+  document.addEventListener("visibilitychange", () => (document.hidden ? clearTimeout(timer) : schedule()));
 
   /* Industry carousel arrows */
   const track = $(".trust-track");

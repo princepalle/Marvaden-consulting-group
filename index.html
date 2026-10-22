@@ -70,37 +70,38 @@
 <main id="main">
   <!-- SHOWCASE (modelled on an auto-playing hero reel) -->
   <section class="showcase" aria-roledescription="carousel" aria-label="Marvaden at a glance">
-    <div class="stage">
-      <article class="slide s-intro on" aria-roledescription="slide" aria-label="1 of 6">
-        <div class="logo-card">
-          <svg class="mark big" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#3b1fa3"/><path d="M10 28V13l10 9 10-9v15" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="30" cy="10" r="3.2" fill="#14c4b4"/></svg>
-          <p class="logo-word">marvaden</p>
-          <p class="logo-tags"><span>Talent</span><span>Technology</span><span>Partnership</span></p>
-        </div>
+    <div class="stage" data-stage>
+      <article class="scene sc-logo" aria-roledescription="slide" aria-label="1 of 6">
+        <div class="logo-card"><svg class="mark big" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#3b1fa3"/><path d="M10 28V13l10 9 10-9v15" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle class="dot" cx="30" cy="10" r="3.2" fill="#14c4b4"/></svg><p class="logo-word">marvaden</p><p class="label"><span class="sr">Talent | Technology | Partnership</span><span class="typed" data-text="Talent | Technology | Partnership" aria-hidden="true"></span></p></div>
       </article>
-      <article class="slide s-blue" aria-roledescription="slide" aria-label="2 of 6">
-        <div class="panel"><h2>IT &amp; Healthcare Technology Staffing</h2></div>
-        <div class="art art-grid" aria-hidden="true">
+      <article class="scene lay-a blue" aria-roledescription="slide" aria-label="2 of 6">
+        <div class="panel"><h2><span class="ln">Powering</span><span class="ln">Healthcare &amp;</span><span class="ln">Tech Teams</span><span class="ln">With Confidence</span></h2></div>
+        <div class="art"><div class="kb art-grid">
           <span><svg><use href="#i-pulse"/></svg></span><span><svg><use href="#i-shield"/></svg></span><span><svg><use href="#i-cloud"/></svg></span>
-          <span><svg><use href="#i-chart"/></svg></span><span><svg><use href="#i-cpu"/></svg></span><span><svg><use href="#i-layers"/></svg></span>
-        </div>
+          <span><svg><use href="#i-chart"/></svg></span><span><svg><use href="#i-cpu"/></svg></span><span><svg><use href="#i-layers"/></svg></span></div></div>
+        <p class="label"><span class="sr">IT &amp; Healthcare Technology Staffing</span><span class="typed" data-text="IT &amp; Healthcare Technology Staffing" aria-hidden="true"></span></p>
       </article>
-      <article class="slide s-orange" aria-roledescription="slide" aria-label="3 of 6">
-        <div class="art art-pulse" aria-hidden="true"><svg viewBox="0 0 200 80"><path d="M0 40h50l12-28 18 56 14-40 10 12h96"/></svg></div>
-        <div class="panel"><h2>Right Talent.<br>Right Time.</h2><p>Vetted professionals, matched to your stack and your culture</p></div>
+      <article class="scene lay-b orange" aria-roledescription="slide" aria-label="3 of 6">
+        <p class="label"><span class="sr">Talent &amp; Recruitment</span><span class="typed" data-text="Talent &amp; Recruitment" aria-hidden="true"></span></p>
+        <div class="art"><div class="kb art-pulse"><svg viewBox="0 0 200 80"><path d="M0 40h50l12-28 18 56 14-40 10 12h96"/></svg></div></div>
+        <div class="panel"><h2><span class="ln">Right Talent.</span><span class="ln">Right Time.</span><span class="ln">Matched To</span><span class="ln">Your Stack</span></h2></div>
       </article>
-      <article class="slide s-split" aria-roledescription="slide" aria-label="4 of 6">
-        <div class="panel"><h2>Contract · Contract-to-Hire · Direct Hire · Remote Teams</h2></div>
-        <div class="art art-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <article class="scene lay-a orange" aria-roledescription="slide" aria-label="4 of 6">
+        <div class="panel"><h2><span class="ln">Contract.</span><span class="ln">Contract-to-Hire.</span><span class="ln">Direct Hire.</span><span class="ln">Remote Teams.</span></h2></div>
+        <div class="art"><div class="kb art-bars"><i></i><i></i><i></i><i></i><i></i></div></div>
+        <p class="label"><span class="sr">Flexible Hiring Models</span><span class="typed" data-text="Flexible Hiring Models" aria-hidden="true"></span></p>
       </article>
-      <article class="slide s-blue s-map" aria-roledescription="slide" aria-label="5 of 6">
-        <div class="art art-map" aria-hidden="true"><svg><use href="#i-globe"/></svg><b></b><b></b><b></b><b></b></div>
-        <div class="panel"><h2>Remote, Local &amp; Nationwide</h2><p>Wherever your team works, we find the people to power it</p></div>
+      <article class="scene lay-b blue" aria-roledescription="slide" aria-label="5 of 6">
+        <p class="label"><span class="sr">Remote · Local · Nationwide</span><span class="typed" data-text="Remote · Local · Nationwide" aria-hidden="true"></span></p>
+        <div class="art"><div class="kb art-map"><svg><use href="#i-globe"/></svg><b></b><b></b><b></b><b></b></div></div>
+        <div class="panel"><h2><span class="ln">Wherever</span><span class="ln">Your Team</span><span class="ln">Works, We</span><span class="ln">Deliver</span></h2></div>
       </article>
-      <article class="slide s-orange s-talent" aria-roledescription="slide" aria-label="6 of 6">
-        <div class="panel"><h2>Build the Career You Want</h2><p>For IT &amp; health-tech professionals</p></div>
-        <div class="art art-people" aria-hidden="true"><svg><use href="#i-users"/></svg><svg><use href="#i-brief"/></svg></div>
+      <article class="scene lay-a blue" aria-roledescription="slide" aria-label="6 of 6">
+        <div class="panel"><h2><span class="ln">Accelerate</span><span class="ln">Your</span><span class="ln">Career</span><span class="ln">Trajectory</span></h2></div>
+        <div class="art"><div class="kb art-people"><svg><use href="#i-users"/></svg><svg><use href="#i-brief"/></svg></div></div>
+        <p class="label"><span class="sr">For IT &amp; Health-Tech Professionals</span><span class="typed" data-text="For IT &amp; Health-Tech Professionals" aria-hidden="true"></span></p>
       </article>
+      <div class="wipe" aria-hidden="true"></div>
     </div>
     <div class="controls">
       <div class="dots" role="group" aria-label="Choose slide"></div>
