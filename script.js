@@ -14,6 +14,7 @@ const MCG = {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.documentElement.classList.add("js");
 
   /* Contact details */
   const soon = t => `<span class="muted">${t} coming soon</span>`;

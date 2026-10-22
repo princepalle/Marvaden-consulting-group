@@ -1,4 +1,6 @@
+/* Single light brand look, set deliberately. */
 :root {
+  color-scheme: light;
   --purple: #3b1fa3;
   --purple-ink: #24125f;
   --orange: #ef7a1a;
@@ -49,7 +51,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .btn[disabled] { opacity: .6; cursor: progress; }
 
 /* header */
-.top { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); transition: box-shadow .3s; }
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); transition: box-shadow .3s; }
 .top.solid { box-shadow: 0 6px 20px -12px rgba(20,18,43,.35); }
 .top-row { display: flex; align-items: center; gap: 28px; height: 72px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--purple); margin-right: auto; }
@@ -244,13 +246,14 @@ input:focus, select:focus, textarea:focus { border-color: var(--purple); outline
 .copy { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); font-size: .88rem; text-align: center; }
 
 /* floating chat */
-.chat { position: fixed; right: 18px; bottom: 18px; z-index: 40; width: 58px; height: 58px; border-radius: 50%; border: 0; cursor: pointer; color: #fff;
+.chat { position: fixed; right: calc(18px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 40; width: 58px; height: 58px; border-radius: 50%; border: 0; cursor: pointer; color: #fff;
   background: linear-gradient(140deg, #2b5fe0, #17b3aa); box-shadow: 0 0 0 6px rgba(42,134,216,.18), 0 12px 26px -8px rgba(23,71,209,.7); display: grid; place-items: center; }
 .chat svg { width: 24px; height: 24px; }
 
 /* reveal */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.in { opacity: 1; transform: none; }
+/* Content is always visible at rest; scrolling only adds a gentle lift. */
+.reveal { transition: transform .7s ease; }
+.js .reveal:not(.in) { transform: translateY(14px); }
 
 /* responsive */
 @media (max-width: 1000px) {
@@ -275,6 +278,6 @@ input:focus, select:focus, textarea:focus { border-color: var(--purple); outline
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .reveal { opacity: 1; transform: none; }
+  .js .reveal:not(.in) { transform: none; }
 }
 .trust-track:focus-visible { outline-offset: -3px; }
