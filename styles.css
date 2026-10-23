@@ -55,7 +55,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .top.solid { box-shadow: 0 6px 20px -12px rgba(20,18,43,.35); }
 .top-row { display: flex; align-items: center; gap: 28px; height: 72px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--purple); margin-right: auto; }
-.mark { width: 38px; height: 38px; stroke: none; }
+.mark { width: 38px; height: 38px; border-radius: 8px; }
 .brand b { display: block; font: 800 1.55rem/1 var(--head); letter-spacing: -.03em; }
 .brand small { display: block; font: 600 .62rem/1 var(--head); letter-spacing: .26em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
 .nav { display: flex; gap: 26px; }
@@ -138,11 +138,9 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .media::after { background-image: linear-gradient(180deg, rgba(11,21,52,.05), rgba(11,21,52,.25)); }
 
 /* logo scene */
-.sc-logo { display: grid; place-items: center; }
-.sc-logo .logo-card { position: static; text-align: center; }
-.sc-logo .label { position: static; font-size: max(10px, 1.7cqw); font-weight: 700; color: var(--purple-ink); }
-.mark.big { width: 8.5cqw; height: auto; transform: scale(.4); opacity: 0; }
-.logo-word { font: 800 9cqw/1 var(--head); color: var(--purple); letter-spacing: -.04em; margin: .08em 0 .2em; opacity: .15; filter: blur(4px); }
+.sc-logo { display: grid; place-items: center; background: #020818; }
+.logo-full { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.12); filter: blur(6px) brightness(1.6); }
+.play .logo-full { opacity: 1; transform: none; filter: none; transition: opacity .6s ease, transform 2.4s cubic-bezier(.16,.8,.24,1), filter 1.2s ease; }
 
 /* play: the entrance choreography */
 .play .panel { opacity: 1; transform: none; transition: transform .75s cubic-bezier(.16,.8,.24,1), opacity .9s ease; }
@@ -151,10 +149,6 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .play .art { opacity: 1; transform: none; transition: transform .9s cubic-bezier(.16,.8,.24,1) .55s, opacity .9s ease .55s; }
 .play .kb { animation: kenburns 7s ease-out .6s forwards; }
 @keyframes kenburns { to { transform: scale(1.12) translate(-1.5%, 1%); } }
-.play .mark.big { opacity: 1; transform: scale(1); transition: transform .7s cubic-bezier(.3,1.6,.5,1) .15s, opacity .3s ease .15s; }
-.play .mark .dot { animation: pop .6s ease 1s both; transform-box: fill-box; transform-origin: center; }
-@keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.9); } 100% { transform: scale(1); } }
-.play .logo-word { opacity: 1; filter: none; transition: opacity 1s ease .3s, filter 1s ease .3s; }
 
 /* entry direction per scene: panels and artwork arrive from a different corner each time */
 .scene:nth-of-type(2) { --px:-45%; --py:0%; --ax:35%; --ay:0%; }
@@ -330,7 +324,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--purple); outline
   .jobs li { flex-wrap: wrap; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .scene .panel, .scene .art, .ln, .mark.big, .logo-word { opacity: 1; transform: none; filter: none; }
+  .scene .panel, .scene .art, .ln, .logo-full { opacity: 1; transform: none; filter: none; }
   .art-bars i:nth-child(1) { height: 30%; } .art-bars i:nth-child(2) { height: 48%; } .art-bars i:nth-child(3) { height: 64%; }
   .art-bars i:nth-child(4) { height: 80%; } .art-bars i:nth-child(5) { height: 96%; }
   .art-pulse svg { stroke-dashoffset: 0; }
