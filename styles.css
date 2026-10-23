@@ -132,6 +132,10 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .art-people { display: flex; align-items: center; justify-content: center; gap: 10%; color: #fff; background: linear-gradient(150deg, #24125f, #3b1fa3 55%, #1747d1); }
 .art-people svg { width: 30%; height: auto; stroke-width: 1.4; }
 
+.media { background: #0b1534; }
+.media video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.media::after { background-image: linear-gradient(180deg, rgba(11,21,52,.05), rgba(11,21,52,.25)); }
+
 /* logo scene */
 .sc-logo { display: grid; place-items: center; }
 .sc-logo .logo-card { position: static; text-align: center; }

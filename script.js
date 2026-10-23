@@ -63,6 +63,22 @@ const MCG = {
     }, scene.classList.contains("sc-logo") ? 1100 : 1300);
   };
 
+  // Clips load only when their scene first appears (WebM first, MP4 for Safari).
+  const playVideos = scene => {
+    $$("video", stage).forEach(v => { if (!scene.contains(v)) v.pause(); });
+    $$("video", scene).forEach(v => {
+      if (!v.dataset.loaded) {
+        ["webm", "mp4"].forEach(ext => {
+          const src = document.createElement("source");
+          src.src = `${v.dataset.clip}.${ext}`; src.type = `video/${ext}`; v.append(src);
+        });
+        v.dataset.loaded = "1"; v.load();
+      }
+      v.currentTime = 0;
+      if (!paused && !reduceMotion) v.play().catch(() => {});
+    });
+  };
+
   const show = i => {
     scenes.forEach(s => s.classList.remove("on", "play"));
     current = (i + scenes.length) % scenes.length;
@@ -70,6 +86,7 @@ const MCG = {
     scenes.forEach((s, k) => s.setAttribute("aria-hidden", String(k !== current)));
     [...dots.children].forEach((d, k) => { if (k === current) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
     scene.classList.add("on");
+    playVideos(scene);
     void scene.offsetWidth;            // restart transitions from the "before" state
     scene.classList.add("play");
     typeLabel(scene);
@@ -84,6 +101,7 @@ const MCG = {
   const schedule = () => { clearTimeout(timer); if (!paused) timer = setTimeout(() => { go(current + 1); schedule(); }, SCENE_MS); };
   const setPaused = p => {
     paused = p; stage.classList.toggle("paused", p);
+    $$("video", stage).forEach(v => { if (p) v.pause(); else if (v.closest(".scene.on")) v.play().catch(() => {}); });
     pauseBtn.setAttribute("aria-pressed", String(p));
     pauseBtn.setAttribute("aria-label", p ? "Play slideshow" : "Pause slideshow");
     schedule();
