@@ -133,7 +133,8 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .art-people svg { width: 30%; height: auto; stroke-width: 1.4; }
 
 .media { background: #0b1534; }
-.media video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.media video, .media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.media.pos-l img { object-position: 12% 50%; }
 .media::after { background-image: linear-gradient(180deg, rgba(11,21,52,.05), rgba(11,21,52,.25)); }
 
 /* logo scene */
@@ -161,6 +162,9 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .scene:nth-of-type(4) { --px:-30%; --py:-30%; --ax:30%; --ay:-15%; }
 .scene:nth-of-type(5) { --px:30%; --py:-30%; --ax:-35%; --ay:20%; }
 .scene:nth-of-type(6) { --px:-45%; --py:20%; --ax:30%; --ay:20%; }
+.scene:nth-of-type(7) { --px:30%; --py:30%; --ax:-30%; --ay:-20%; }
+.scene:nth-of-type(8) { --px:-30%; --py:-30%; --ax:35%; --ay:15%; }
+.scene:nth-of-type(9) { --px:45%; --py:0%; --ax:-35%; --ay:20%; }
 
 /* the white wipe that sweeps down from the top edge between scenes */
 .wipe { position: absolute; inset: 0 0 auto; height: 0; background: #fff; z-index: 5; }

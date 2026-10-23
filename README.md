@@ -17,13 +17,15 @@ Services, industries, engagement models and process steps are in `index.html`.
 
 ## Media credits
 Hero video clips (trimmed and compressed in `media/`):
-- Digital network grid: Pexels video 12595752, used under the [Pexels License](https://www.pexels.com/license/) (free for commercial use).
-- "Information technology specialist in data center": [Mixkit](https://mixkit.co/free-stock-video/information-technology-specialist-in-data-center-23218/), used under the Mixkit Stock Video Free License.
+- `network-a` (digital network grid): Pexels video 12595752, used under the [Pexels License](https://www.pexels.com/license/) (free for commercial use).
+- `meeting` ("Leader presents business plan to team at meeting", Mixkit 5683) and `engineers` ("Engineers setting up a data center", Mixkit 23375), used under the Mixkit Stock Video Free License.
+
+Hero photos (`ai-meeting`, `cloud-desk`, `team-vision`, `analyst`, `team-talk`) are crops of images supplied by the site owner; only the photo areas are used, with no baked-in text or vendor logos. Keep a record of where these images came from and their licence.
 
 Don't add iStock/Getty preview files (watermarked `*_adpp_is` downloads). Buy the licence and use the clean file.
 
 ## Notes
-- No client logos are used. Four hero scenes use the licensed clips above; the rest are colour panels and drawn icons that can be swapped for real photos later.
+- No client or vendor logos are used. Each hero scene uses one of the clips or photos above.
 - No client counts or testimonials are shown. Add them only when they're real.
 - Accessibility: keyboard-operable slideshow with a pause button, tabs, accordion and carousel; checked with axe-core.
 
